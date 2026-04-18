@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+  <rect width="512" height="512" rx="32" ry="32" fill="#555" x="0" y="0" stroke="none" stroke-width="0"/>
+  <polygon fill="#aaa" points="80 192 64 206 48 192 48 80 34 64 32 32 48 8 54 48 74 48 80 8 96 32 94 64 80 80" transform="translate(125 60) rotate(35)"/>
+  <text x="250" y="250" font-family="Arial Black, Arial, sans-serif" font-size="140" fill="#d3d3d3" text-anchor="middle" dominant-baseline="middle">AW</text>
+  <g transform="translate(310 150) rotate(35)">
+    <polygon fill="#aaa" points="128 158 128 120 142 102 130 38 136 -12 160 -40 184 -12 190 38 178 102 192 120 192 158 176 142 144 142"/>
+    <circle cx="160" cy="20" r="12" fill="#ddd"/>
+  </g>
+</svg>
