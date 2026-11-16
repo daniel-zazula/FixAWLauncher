@@ -34,8 +34,8 @@ internal class LauncherWindow(Process process, IntPtr hWnd)
 	}
 
 	private static readonly IntPtr HWND_TOP = IntPtr.Zero;
-	private const uint SWP_NOSIZE = 0x0001;
-	private const uint SWP_NOZORDER = 0x0004;
+	private const int DesiredTopPosition = 100;
+	private const int SetPositionDelayMilliseconds = 100;
 
 	internal static async Task<LauncherWindow?> FindIt(Process process)
 	{
@@ -93,14 +93,20 @@ internal class LauncherWindow(Process process, IntPtr hWnd)
 
 	internal async Task FixPosition(CancellationToken cancellationToken)
 	{
+		const uint SWP_NOSIZE = 0x0001;
+		const uint SWP_NOZORDER = 0x0004;
+
 		while (!cancellationToken.IsCancellationRequested && !process.HasExited)
 		{
 			LastWindowsException.ThrowIfFalse(GetWindowRect(hWnd, out RECT rect));
 
-			// Set window position relative to the top of the screen, but keep its current horizontal position and size
-			LastWindowsException.ThrowIfFalse(SetWindowPos(hWnd, HWND_TOP, rect.Left, 100, 0, 0, SWP_NOSIZE | SWP_NOZORDER));
+			if (rect.Top != DesiredTopPosition)
+			{
+				// Set window position relative to the top of the screen, but keep its current horizontal position and size
+				LastWindowsException.ThrowIfFalse(SetWindowPos(hWnd, HWND_TOP, rect.Left, DesiredTopPosition, 0, 0, SWP_NOSIZE | SWP_NOZORDER));
+			}
 
-			await Task.Delay(500, cancellationToken);
+			await Task.Delay(SetPositionDelayMilliseconds, cancellationToken);
 		}
 	}
 }
